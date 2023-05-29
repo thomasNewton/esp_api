@@ -1,0 +1,88 @@
+/* styles.css */
+
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+  }
+  
+  h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  form {
+    margin-bottom: 30px;
+  }
+  
+  label {
+    font-size: 18px;
+  }
+  
+  input[type="text"] {
+    width: 200px;
+    padding: 8px;
+    margin-bottom: 10px;
+    background-color: #222;
+    color: #fff;
+    border: none;
+    outline: none;
+  }
+  
+  input[type="submit"],
+  input[type="button"] {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  input[type="submit"]:hover,
+  input[type="button"]:hover {
+    background-color: #45a049;
+  }
+  
+  #what {
+    font-size: 16px;
+    margin-top: 30px;
+  }
+  
+  /* Cyberpunk-themed styles */
+  
+  body {
+    background-image: url('bg2.jpg');
+    background-size: cover;
+  }
+  
+  h2 {
+    color: #00ff00;
+  }
+  
+  label {
+    color: #00ff00;
+  }
+  
+  input[type="text"] {
+    color: #00ff00;
+    border: 1px solid #00ff00;
+  }
+  
+  input[type="submit"],
+  input[type="button"] {
+    background-color: #ff00ff;
+    border: 1px solid #ff00ff;
+  }
+  
+  input[type="submit"]:hover,
+  input[type="button"]:hover {
+    background-color: #ff00ff;
+  }
+  
+  #what {
+    color: #00ff00;
+  }
+  

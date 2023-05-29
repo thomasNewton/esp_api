@@ -1,0 +1,8 @@
+# uvicorn main:app --reload
+# pip install -r requrirements.txt
+
+uvicorn  # server
+fastapi[all]   # main api 
+pydantic    # to build schemas and data models 
+python-multipart # to process forms
+jinja2 # templates
