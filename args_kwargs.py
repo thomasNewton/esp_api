@@ -18,7 +18,7 @@ def addup(*numbers):
     return total
     
     
-def display_arg(*args, **kwargs):
+def display_arg(*args **kwargs):
     print( "args are:")
     for arg in args:
         print(arg)
@@ -49,4 +49,4 @@ if __name__ == "__main__":
     
     display_arg(a1, a2, a3, param1=True, param2=12, param3=None)
     
-    
+    display_arg(4,5,6,7,8,x=1,y=2,z=3,name="bob") # not sure why but cant switch orger of arg kwarg
