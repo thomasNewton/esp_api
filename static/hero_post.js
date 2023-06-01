@@ -26,7 +26,7 @@ function submitForm() {
       console.log('Form data submitted successfully.');
       console.log('Received superhero object:', superhero);
       // Display confirmation message or perform further actions with the superhero object
-      document.getElementById("what").innerHTML = "Successfly Posted via JavaScript: as JSON Object<br>"+
+      document.getElementById("jin").innerHTML = "Successfly Posted via JavaScript: as JSON Object<br>"+
       "Posted to '/hero' End-Point with a post method sent as json <br>"+
       "Server returned 'Superhero' object<br>superhero.name: "+superhero.name+"<br>superhero.birth: "
       +superhero.birth;

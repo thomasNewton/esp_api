@@ -1,6 +1,13 @@
 from pydantic import BaseModel, HttpUrl
 from typing import List, Union
 
+
+class Temperature(BaseModel):
+    temperature : float 
+    
+
+
+
 class Size(BaseModel):
     rec_hz : int
     rec_vt : int

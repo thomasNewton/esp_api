@@ -102,8 +102,14 @@ def form_hero( request : Request):
     return templates.TemplateResponse("form_hero.html" , {"request" : request , "hero" : hero, "msg" : msg})
     
 
-
-
+@app.post("/temperature")
+async def post_temperature(temp : Temperature ):
+    temp_dict = dict(temp)
+    print(temp)
+    print(type(temp))
+    print(type(temp_dict))
+    print(temp_dict)
+    return True
 
 
 
