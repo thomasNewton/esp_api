@@ -1,0 +1,141 @@
+/* styles.css */
+
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+  }
+  
+  h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #ffaa00;
+  }
+  
+  section {
+    margin-bottom: 30px;
+  }
+  
+  label {
+    font-size: 18px;
+    color: #00ff00;
+  }
+  
+  input[type="text"] {
+    width: 200px;
+    padding: 8px;
+    margin-bottom: 10px;
+    background-color: #222;
+    color: #fff;
+    border: none;
+    outline: none;
+  }
+  
+  input[type="submit"],
+  input[type="button"] {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  input[type="submit"]:hover,
+  input[type="button"]:hover {
+    background-color: #45a049;
+  }
+  
+  #what {
+    font-size: 16px;
+    margin-top: 30px;
+    color: #00ff00;
+  }
+  
+  /* Cyberpunk-themed styles */
+  
+  body {
+    background-image: url('bg2.jpg');
+    background-size: cover;
+  }
+  
+  h2 {
+    color: #00ff00;
+  }
+  
+  input[type="submit"],
+  input[type="button"] {
+    background-color: #ff00ff;
+    border: 1px solid #ff00ff;
+  }
+  
+  input[type="submit"]:hover,
+  input[type="button"]:hover {
+    background-color: #ff00ff;
+  }
+  
+  #body1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 50px;
+    font-size: 24px;
+    color: #ffaa00;
+  }
+  
+  #body2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 50px;
+    font-size: 24px;
+    color: #ffaa00;
+  }
+  
+  footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    padding: 20px;
+  }
+  
+  ul.navbar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  ul.navbar li {
+    margin: 0 5px;
+  }
+  
+  ul.navbar li:first-child a {
+    margin-left: 0;
+  }
+  
+  ul.navbar li:last-child a {
+    margin-right: 0;
+  }
+  
+  ul.navbar li a {
+    display: inline-block;
+    color: #ffaa00;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 10px 20px;
+    border-radius: 4px;
+    background-color: rgba(0, 255, 0, 0.2);
+  }
+  
+  ul.navbar li a:hover {
+    background-color: rgba(0, 255, 0, 0.4);
+  }
+  

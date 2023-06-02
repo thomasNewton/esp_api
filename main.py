@@ -1,4 +1,4 @@
-from fastapi import FastAPI , Body , Request, Form, Depends, HTTPException
+from fastapi import FastAPI , Body , Request, Form, Depends, HTTPException, Response, Header
 from models import *
 from typing import Annotated
 from fastapi.staticfiles import StaticFiles
@@ -7,11 +7,20 @@ from fastapi.responses import HTMLResponse
 from enum import Enum
 from fastapi.encoders import jsonable_encoder
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from pathlib import Path
+
+
+
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+
+
+
+
+
 
 def fake_hash_password(password: str):
     return "fakehashed" + password
@@ -71,16 +80,44 @@ async def read_users_me(
 
 
 
-@app.get("/")
-def root_route():
-    return {"root": "tis is it"}
 
 
+
+
+@app.get("/base", response_class=HTMLResponse )
+def show_base_template( request : Request):
+     return templates.TemplateResponse("base.html" , {"request" : request})
+
+@app.get("/", response_class=HTMLResponse )
+def show_base_template( request : Request):
+     return templates.TemplateResponse("main.html" , {"request" : request})
+ 
+@app.get("/login", response_class=HTMLResponse )
+def show_base_template( request : Request):
+     return templates.TemplateResponse("login.html" , {"request" : request})
+ 
+@app.get("/esp_data", response_class=HTMLResponse )
+def show_base_template( request : Request):
+     return templates.TemplateResponse("esp_view1.html" , {"request" : request})
+ 
+@app.get("/chat", response_class=HTMLResponse )
+def show_base_template( request : Request):
+     return templates.TemplateResponse("chat.html" , {"request" : request})
+
+
+
+"""
+# this is just a route example not really meant to be be called no html was made to post to it
+@app.post("/hero2/{id}") # example of param,query,body variables and embeding a query one into the body
+def recieve_hero(id: int,ide: Annotated[int, Body(embed = True)], slurm : bool ,hero : Superhero):
+    return hero
+    
+    
 @app.post("/hero", response_model=Superhero) 
 def recieve_hero(hero : Superhero):   
     jd = jsonable_encoder(hero)   
-    # in python this is an object, it is automatically converted by fastapi on return to json.
-    # but if we need it to be json for something else ( like a database)  we have to convert it
+    # in python this is an object, fast api automatically converts it when its returned to the client.
+    # but if we need it to be json for something else ( like a database)  we have to convert it explicitly
     # it creates a dictonary ready for json.dumps()  not a single long string
     return hero
 
@@ -91,8 +128,6 @@ def recieve_form_hero(request: Request , name: Annotated[str, Form()], age : Ann
     msg ="This is the return message from submiting a Superhero with the form.\
         The form elements were loaded individually and a dictionary called hero was made in the route and sent back with the jinja template"
     return templates.TemplateResponse("form_hero.html" , {"request" : request , "hero" : hero, "msg" : msg})
-
-
 
 
 @app.get("/form_hero" , response_class=HTMLResponse)
@@ -109,25 +144,18 @@ async def post_temperature(temp : Temperature ):
     print(type(temp))
     print(type(temp_dict))
     print(temp_dict)
-    return True
-
-
-
-
-
-
-"""
-# this is just a route example not really meant to be be called no html was made to post to it
-@app.post("/hero2/{id}") # example of param,query,body variables and embeding a query one into the body
-def recieve_hero(id: int,ide: Annotated[int, Body(embed = True)], slurm : bool ,hero : Superhero):
-    return hero
-
-class Tags(Enum):
-    items = "items"
-    users = "users"
-
-
-@app.get("/items/", tags=[Tags.items])
-async def get_items():
-    return ["Portal gun", "Plumbus"]
+    return True   
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     """

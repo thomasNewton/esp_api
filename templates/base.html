@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}ESP_API{% endblock %}</title>
+    <link href="{{ url_for('static', path='/styles2.css') }}" rel="stylesheet">
+    {% block head %}{% endblock %}
+</head>
+<body>
+    {% block header %}
+    <header>
+        <h1>ESP API - an api designed to collect and display data collected from esp32 sensors:</h1>
+    </header>
+    {% endblock %}
+    <section id="body1">
+        {% block body1 %}base template body1 section{% endblock %}
+    </section>
+
+    <section id="body2">
+        {% block body2 %}base template body2 section{% endblock %}
+    </section>
+
+    {% block navigation %}
+    <footer>
+        <ul class="navbar">
+            <li><a href="/">Main Page</a></li>
+            <li><a href="/login">Login/Create User</a></li>
+            <li><a href="/chat">Chat</a></li>
+            <li><a href="/esp_data">View ESP32 Data</a></li>
+            <li><a href="/docs">DOCS</a></li>
+            <li><a href="/redoc">REDOC</a></li>
+        </ul>
+    </footer>
+    {% endblock %}
+    {% block scripts %}
+    
+
+
+    {% endblock %}
+</body>
+</html>
+
+
+
+
+
+

@@ -18,13 +18,13 @@ def addup(*numbers):
     return total
     
     
-def display_arg(*args **kwargs):
+def display_arg(*args, **kwargs):
     print( "args are:")
     for arg in args:
         print(arg)
     print("\nkwargs are:")
     for kwarg in kwargs:
-        print(kwarg)
+        print(f"Key: {kwarg}  Value: {kwargs[kwarg]}")
     
     
 

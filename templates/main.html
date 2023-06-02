@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}ESP_API - My Custom Page{% endblock %}
+
+{% block header %}
+    {{ super() }}
+    <h2>About ESP32</h2>
+{% endblock %}
+
+{% block body1 %}
+
+<img src="{{ url_for('static', path='/tc.jpg') }}" alt="ESP32" width="300">
+<h2>About ESP32</h2>
+<p>The ESP32 was developed by the Tyrell Corporation as a data collection tool
+     designed to aid in enforcement of new corporate mandated restrictions on public 
+     access to movment and free speach. Over time, it became a symbol of a new era of 
+    corporate power and control, and the Tyrell Corparations transformation
+    into the institution that it is today   </p>
+
+<h2>Company Information</h2>
+<ul>
+    <li><a href="https://www.xyzcorporation.com">XYZ Corporation Website</a></li>
+    <li><a href="https://www.xyzcorporation.com/products">Products</a></li>
+    <li><a href="https://www.xyzcorporation.com/about">About Us</a></li>
+</ul>
+{% endblock %}
+
+{% block body2 %}
+    
+<h2>Functions and Uses</h2>
+    <p>The ESP32 offers a wide range of features and is commonly used in various applications:</p>
+    
+    <ul>
+        <li>Wireless connectivity: It supports Wi-Fi and Bluetooth, enabling seamless wireless communication.</li>
+        <li>Microcontroller capabilities: The ESP32 integrates a powerful microcontroller unit for running embedded applications.</li>
+        <li>Sensor integration: It can interface with various sensors, enabling data collection and monitoring.</li>
+        <li>Internet of Things (IoT) applications: The ESP32 is commonly used in IoT projects for its connectivity and processing capabilities.</li>
+        <li>Home automation: It can be used to control and monitor smart home devices, such as lights, thermostats, and security systems.</li>
+        <li>Industrial automation: The ESP32 is employed in industrial settings for automation and monitoring tasks.</li>
+    </ul>
+
+{% endblock %}
