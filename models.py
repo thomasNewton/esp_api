@@ -4,9 +4,6 @@ from typing import List, Union
 
 class Temperature(BaseModel):
     temperature : float 
-    
-
-
 
 class Size(BaseModel):
     rec_hz : int

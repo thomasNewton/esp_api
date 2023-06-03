@@ -89,19 +89,30 @@ def show_base_template( request : Request):
      return templates.TemplateResponse("base.html" , {"request" : request})
 
 @app.get("/", response_class=HTMLResponse )
-def show_base_template( request : Request):
+def show_main_template( request : Request):
      return templates.TemplateResponse("main.html" , {"request" : request})
  
 @app.get("/login", response_class=HTMLResponse )
-def show_base_template( request : Request):
+def show_login_template( request : Request):
      return templates.TemplateResponse("login.html" , {"request" : request})
  
+@app.post("/login")
+def read_login():
+    return True
+ 
+ 
+
+@app.get("/create_user", response_class=HTMLResponse )
+def show_create_user_template( request : Request):
+     return templates.TemplateResponse("create_user.html" , {"request" : request})
+ 
+ 
 @app.get("/esp_data", response_class=HTMLResponse )
-def show_base_template( request : Request):
+def show_esp_data_template( request : Request):
      return templates.TemplateResponse("esp_view1.html" , {"request" : request})
  
 @app.get("/chat", response_class=HTMLResponse )
-def show_base_template( request : Request):
+def show_chat_template( request : Request):
      return templates.TemplateResponse("chat.html" , {"request" : request})
 
 

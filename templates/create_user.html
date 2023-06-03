@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}ESP_API - My Custom Page{% endblock %}
+
+{% block header %}
+    {{ super() }}
+{% endblock %}
+
+{% block body1 %}
+<h2>Make New User</h2>
+
+  <script>
+    function validateForm() {
+      var password = document.getElementById("password").value;
+      var confirmPassword = document.getElementById("confirmPassword").value;
+
+      if (password !== confirmPassword) {
+        alert("Passwords do not match!");
+        return false;
+      }
+    }
+  </script>
+
+  <h2>Create New User</h2>
+  <form action="/submit" method="post" onsubmit="return validateForm()">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required><br>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required><br>
+
+    <label for="confirmPassword">Confirm Password:</label>
+    <input type="password" id="confirmPassword" name="confirmPassword" required><br>
+
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required><br>
+
+    <label for="age">Age:</label>
+    <input type="number" id="age" name="age" required><br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email"><br>
+
+    <input type="submit" value="Create User">
+  </form>
+
+
+
+{% endblock %}
+
+{% block body2 %}
+<p>Login <a href="/login">Create new account</a></p>
+{% endblock %}
+
