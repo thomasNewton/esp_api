@@ -1,63 +1,20 @@
-from pydantic import BaseModel, HttpUrl
-from typing import List, Union
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
+from sqlalchemy.orm import relationship
 
+from database import Base
 
-class Temperature(BaseModel):
-    temperature : float 
-
-class Size(BaseModel):
-    rec_hz : int
-    rec_vt : int
-    min_hz : int | None
-    min_vt : int | None
-    max_hz : int | None
-    max_vt : int | None
-
-class Image(BaseModel):
-    url : HttpUrl
-    description : str | None
-    image_name : str
-    size : Size
-
-class Superhero(BaseModel):
-    name: str
-    birth: int 
-    death : int | None
-    powers : set[str] | None
-    allies : set | None
-    image : Image | None
-   
-
+class User(Base):
+    __tablename__ = "Users"
+    id = Column(Integer, primary_key=True, index=True)
+    email = Column(String, unique=True, index=True)
+    hashed_password = Column(String)
+    is_active = Column(Boolean, default=True)
+    items = relationship("Item", back_populates="owner")
     
-class Super_team(BaseModel):
-    name : str
-    founded : int
-    members : list[Superhero]
-    
-# for a demo on user authentication    
-fake_users_db = {
-    "johndoe": {
-        "username": "johndoe",
-        "full_name": "John Doe",
-        "email": "johndoe@example.com",
-        "hashed_password": "fakehashedsecret",
-        "disabled": False,
-    },
-    "alice": {
-        "username": "alice",
-        "full_name": "Alice Wonderson",
-        "email": "alice@example.com",
-        "hashed_password": "fakehashedsecret2",
-        "disabled": True,
-    },
-}
-
-class User(BaseModel):
-    username: str
-    email: str | None = None
-    full_name: str | None = None
-    disabled: bool | None = None
-
-
-class UserInDB(User):
-    hashed_password: str
+class Item(Base):
+    __tablename__ = "items"
+    id = Column(Integer, primary_key=True, index=True)
+    title = Column(String, index=True)
+    description = Column(String, index=True)
+    owner_id = Column(Integer, ForeignKey("users.id"))
+    owner = relationship("User", back_populates="items")

@@ -1,0 +1,19 @@
+#body1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px;
+  background-color: #f2f2f2; /* Background color for the section */
+}
+
+.form-container {
+  flex: 0 0 calc(50% - 20px); /* Take up 50% of the available width with a buffer of 20px */
+  padding: 20px;
+  border: 1px solid black; /* Border for the form */
+  background-color: white; /* Background color for the form */
+}
+
+.image-container {
+  flex: 0 0 calc(20% - 20px); /* Take up 50% of the available width with a buffer of 20px */
+  padding-left: 10px; /* Buffer between form and image */
+}

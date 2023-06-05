@@ -1,14 +1,18 @@
 {% extends "base.html" %}
 
 {% block title %}ESP_API - My Custom Page{% endblock %}
-
+{% block head %} 
+<link href="{{ url_for('static', path='/user_form.css') }}" rel="stylesheet">
+{% endblock %}
 {% block header %}
     {{ super() }}
 {% endblock %}
 
 {% block body1 %}
-<h2>Make New User</h2>
-
+<div class="image-container">
+   <h2>Create New User</h2>
+<img src="{{ url_for('static', path='/tc.jpg') }}" alt="ESP32" width="300">
+</div>
   <script>
     function validateForm() {
       var password = document.getElementById("password").value;
@@ -21,8 +25,9 @@
     }
   </script>
 
-  <h2>Create New User</h2>
-  <form action="/submit" method="post" onsubmit="return validateForm()">
+ 
+<div class="form-container">
+  <form method="post" onsubmit="return validateForm()">
     <label for="username">Username:</label>
     <input type="text" id="username" name="username" required><br>
 
@@ -35,20 +40,17 @@
     <label for="name">Name:</label>
     <input type="text" id="name" name="name" required><br>
 
-    <label for="age">Age:</label>
-    <input type="number" id="age" name="age" required><br>
-
     <label for="email">Email:</label>
     <input type="email" id="email" name="email"><br>
 
     <input type="submit" value="Create User">
   </form>
-
+</div>
 
 
 {% endblock %}
 
 {% block body2 %}
-<p>Login <a href="/login">Create new account</a></p>
+<p>Already have an account: <a href="/login">Login</a></p>
 {% endblock %}
 
