@@ -86,3 +86,21 @@ def mult(x,y):
     return x*y
 
 print(mult(20,3,4))
+
+def cake(fun):
+    def wrapper():
+       fu=fun()
+       return_value = fu +"more text"
+       return return_value
+    return wrapper
+
+
+
+def greeting():
+    s1=  input("enter first name ")
+    s2 = input("enter last name ")
+    output = f"Hello {s1} {s2}"
+    return output
+
+
+print(greeting())

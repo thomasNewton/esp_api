@@ -1,66 +1,74 @@
 from fastapi import FastAPI , Body , Request, Form, Depends, HTTPException, Response, Header
-import models 
 from typing import Annotated
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
 from enum import Enum
 from fastapi.encoders import jsonable_encoder
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
-from pathlib import Path
-import schemas 
-from sqlalchemy.orm import Session
-import crud
-from database import SessionLocal, engine
+from models import *
+
+
+def fake_hash_password(password: str):
+    return "fakehashed" + password
+
+
+
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+
+@app.get("/base", response_class=HTMLResponse )
+def show_base_template( request : Request):
+     return templates.TemplateResponse("base.html" , {"request" : request})
+
+@app.get("/", response_class=HTMLResponse )
+def show_main_template( request : Request):
+     return templates.TemplateResponse("main.html" , {"request" : request})
+ 
+@app.get("/login", response_class=HTMLResponse )
+def show_login_template( request : Request):
+     return templates.TemplateResponse("login.html" , {"request" : request})
+ 
+
+@app.get("/create_user", response_class=HTMLResponse )
+def show_create_user_template( request : Request):
+     return templates.TemplateResponse("create_user.html" , {"request" : request})
+ 
+ 
+@app.post("/create_user", response_model=User) # returns a User object to protect password
+def read_new_user(request: Request , username: Annotated[str, Form()], password : Annotated[str , Form()], \
+name : Annotated[str , Form()], email : Annotated[str , Form() ] | None = None  ):
+    new_user ={"username" : username , "password" : password, "name": name , "email": email}
+    pydantic_user = UserInDB( 
+        name=name,
+        username=username,
+        disabled=False,
+        email=email,
+        hashed_password=fake_hash_password(password)  # temp
+                         )
+    return pydantic_user   # becase of the response model = user  .. no password returned 
+ 
+ 
+@app.get("/esp_data", response_class=HTMLResponse )
+def show_esp_data_template( request : Request):
+     return templates.TemplateResponse("esp_view1.html" , {"request" : request})
+ 
+@app.get("/chat", response_class=HTMLResponse )
+def show_chat_template( request : Request):
+     return templates.TemplateResponse("chat.html" , {"request" : request})
 
 
-# Dependency
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
-
-@app.post("/users/", response_model=schemas.User)
-def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
-    db_user = crud.get_user_by_email(db, email=user.email)
-    if db_user:
-        raise HTTPException(status_code=400, detail="Email already registered")
-    return crud.create_user(db=db, user=user)
-
-
-@app.get("/users/", response_model=list[schemas.User])
-def read_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    users = crud.get_users(db, skip=skip, limit=limit)
-    return users
-
-
-@app.get("/users/{user_id}", response_model=schemas.User)
-def read_user(user_id: int, db: Session = Depends(get_db)):
-    db_user = crud.get_user(db, user_id=user_id)
-    if db_user is None:
-        raise HTTPException(status_code=404, detail="User not found")
-    return db_user
-
-
-@app.post("/users/{user_id}/items/", response_model=schemas.Item)
-def create_item_for_user(
-    user_id: int, item: schemas.ItemCreate, db: Session = Depends(get_db)
-):
-    return crud.create_user_item(db=db, item=item, user_id=user_id)
-
-
-@app.get("/items/", response_model=list[schemas.Item])
-def read_items(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    items = crud.get_items(db, skip=skip, limit=limit)
-    return items
+@app.post("/temp")
+async def post_temperature(temp : Temperature ):
+    temp_dict = dict(temp)
+    print(temp)
+    print(type(temp))
+    print(type(temp_dict))
+    print(temp_dict)
+    return True   
+    
 
 
 
@@ -72,8 +80,6 @@ def read_items(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
 
 
 """
-def fake_hash_password(password: str):
-    return "fakehashed" + password
 
 def get_user(db, username: str):
     if username in db:
@@ -129,49 +135,6 @@ async def read_users_me(
 
 
 
-@app.get("/base", response_class=HTMLResponse )
-def show_base_template( request : Request):
-     return templates.TemplateResponse("base.html" , {"request" : request})
-
-@app.get("/", response_class=HTMLResponse )
-def show_main_template( request : Request):
-     return templates.TemplateResponse("main.html" , {"request" : request})
- 
-@app.get("/login", response_class=HTMLResponse )
-def show_login_template( request : Request):
-     return templates.TemplateResponse("login.html" , {"request" : request})
- 
-
- 
-    
- 
-
-@app.get("/create_user", response_class=HTMLResponse )
-def show_create_user_template( request : Request):
-     return templates.TemplateResponse("create_user.html" , {"request" : request})
- 
- 
-@app.post("/create_user", response_model=User) # returns a User object to protect password
-def read_new_user(request: Request , username: Annotated[str, Form()], password : Annotated[str , Form()], \
-name : Annotated[str , Form()], email : Annotated[str , Form() ] | None = None  ):
-    new_user ={"username" : username , "password" : password, "name": name , "email": email}
-    pydantic_user = UserInDB( 
-        name=name,
-        username=username,
-        disabled=False,
-        email=email,
-        hashed_password=fake_hash_password(password)  # temp
-                         )
-    return pydantic_user   # becase of the response model = user  .. no password returned 
- 
- 
-@app.get("/esp_data", response_class=HTMLResponse )
-def show_esp_data_template( request : Request):
-     return templates.TemplateResponse("esp_view1.html" , {"request" : request})
- 
-@app.get("/chat", response_class=HTMLResponse )
-def show_chat_template( request : Request):
-     return templates.TemplateResponse("chat.html" , {"request" : request})
 
 
 
@@ -206,15 +169,7 @@ def form_hero( request : Request):
     return templates.TemplateResponse("form_hero.html" , {"request" : request , "hero" : hero, "msg" : msg})
     
 
-@app.post("/temperature")
-async def post_temperature(temp : Temperature ):
-    temp_dict = dict(temp)
-    print(temp)
-    print(type(temp))
-    print(type(temp_dict))
-    print(temp_dict)
-    return True   
-    
+
     
     
     
