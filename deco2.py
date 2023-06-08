@@ -3,10 +3,11 @@ from typing import List, Union
 from fastapi.encoders import jsonable_encoder
 import json
 from schemas import *
+from models import *
 
 
 
-def add_user(user: UserInDB, db:dict):
+def add_user(user: User_Pw, db:dict):
     db[user.username] = jsonable_encoder(user)
     with open("my_db.db", "w") as f:
         json.dump(db, f)
@@ -21,7 +22,7 @@ if __name__ == "__main__":
     user1.email = "tom@tommy.com"
   
     
-    user2 = UserInDB(
+    user2 = User_Pw(
         username="sam",
         name="tom",
         email="tom@tommy.com",

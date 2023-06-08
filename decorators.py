@@ -5,9 +5,9 @@ add_one(5)
 
 
 def plus_two(number):
-    def sub_two(number):
+    def sub_two():
         return number -2
-    result = sub_two(number)
+    result = sub_two()
     return result
 print(plus_two(4))
 #print(sub_two(5))   will not find this funciton
@@ -104,3 +104,10 @@ def greeting():
 
 
 print(greeting())
+
+
+
+
+
+
+
