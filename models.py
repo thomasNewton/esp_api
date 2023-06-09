@@ -12,17 +12,17 @@ class UserInDB(Base):
     name = Column(String)
     disabled = Column(Boolean)
     hashed_pw =  Column(String)
-    
+"""   
 class EspData(Base):
     __tablename__ = "Esp_Data"
-    time_recieved =  Column(DateTime, primary_key=True)
+    time_recieved =  Column(String, primary_key=True)
     c_temp = Column( Float )
     f_temp : Column( Float )
     humidity : Column( Float )
     c_heat_index : Column( Float )
     f_heat_index : Column( Float )
 
-
+"""
 # pydantic models - 
 class User(BaseModel):
     username: str

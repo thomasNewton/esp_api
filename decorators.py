@@ -4,6 +4,7 @@ add_one = plus_one   # function is assigned to a variable , then called from its
 add_one(5)
 
 
+
 def plus_two(number):
     def sub_two():
         return number -2

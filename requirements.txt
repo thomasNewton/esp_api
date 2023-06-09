@@ -8,3 +8,5 @@ python-multipart # to process forms
 jinja2 # templates
 
 sqlalchemy   # this is an ORM  - object relational Mapping library a 'middleware' bt python and db
+
+faker
